@@ -208,7 +208,7 @@
                         </a>
                       </li>
                       <li class="pe-3">
-                        <a href="login.jsp">
+                        <a href="Login.jsp">
                           <svg class="user">
                             <use xlink:href="#user"></use>
                           </svg>
