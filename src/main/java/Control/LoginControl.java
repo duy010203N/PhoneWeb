@@ -19,14 +19,16 @@ public class LoginControl extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("user");
-		String password = req.getParameter("pass");
+		String user = req.getParameter("user");
+		String pass = req.getParameter("pass");
 		DAO dao = new DAO();
-		Account a = dao.login(username, password);
+		Account a = dao.login(user,pass);
 		if (a == null) {
 			req.setAttribute("mess", "Wrong user or pass");
 			req.getRequestDispatcher("Login.jsp").forward(req, resp);
 		}else {
+			HttpSession session = req.getSession();
+			session.setAttribute("acc", a);
 			resp.sendRedirect("HomePage.jsp");
 		}
 	}

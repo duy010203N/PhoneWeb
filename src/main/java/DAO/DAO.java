@@ -61,7 +61,7 @@ public class DAO {
 	}
 	
 	public void signup(String user ,String pass) {
-		String query = "INSERT INTO Account (user, pass, isSell,isAdmin) VALUES (?,?,?,?)";
+		String query = "INSERT INTO Account (user,pass,isSell,isAdmin) VALUES (?,?,0,0)";
 		 try {
 		        new DBConnect();
 		        conn = DBConnect.getConn();
@@ -93,6 +93,12 @@ public class DAO {
 	    } 
 	    return null;
 	}
-	
+	public static void main(String[] args) {
+		DAO dao = new DAO();
+		List<Product> list = dao.getAllProduct();
+		for (Product o : list) {
+			System.out.println(o);
+		}
+	}
 
 }

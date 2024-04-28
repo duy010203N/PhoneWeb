@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
   <head>
@@ -157,10 +159,16 @@
                   <a class="nav-link me-4" href="#company-services">Services</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#mobile-products">Products</a>
+                  <a class="nav-link me-4" href="#mobile-products">Mobile</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#smart-watches">Watches</a>
+                  <a class="nav-link me-4" href="#ipad-products">Ipad</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-4" href="#macbook-products">Macbook</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-4" href="#aw-products">Apple Watch</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link me-4" href="#yearly-sale">Sale</a>
@@ -207,6 +215,7 @@
                           </svg>
                         </a>
                       </li>
+                      <c:if test = "${sessionScope.acc == null }">
                       <li class="pe-3">
                         <a href="Login.jsp">
                           <svg class="user">
@@ -214,6 +223,20 @@
                           </svg>
                         </a>
                       </li>
+                      </c:if>
+                      
+                       <c:if test = "${sessionScope.acc != null }">
+			             <li class="pe-3">
+                        <a href="#">Hello ${sessionScope.acc.user }</a>
+                      </li>
+			             <li clasx`s="pe-3">
+						  <a href="logoutdime">
+						    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"/></svg>
+						      <use xlink:href="logoutdime">Log out</use>
+						  </a>
+						</li>			      
+                      </c:if>
+                                     
                       <li>
                         <a href="cart.html">
                           <svg class="cart">
@@ -344,10 +367,10 @@
           <div class="display-header d-flex justify-content-between pb-3">
             <h2 class="display-7 text-dark text-uppercase">Mobile Products</h2>
             <div class="btn-right">
-              <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+              <a href="index.jsp" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
             </div>
           </div>
-          <div class="swiper product-swiper">
+        <!--   <div class="swiper product-swiper">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <div class="product-card position-relative">
@@ -442,114 +465,157 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+     <div class="swiper product-swiper">
+    <div class="swiper-wrapper">
+        <c:forEach items="${listP}" var="o" varStatus="loop">
+            <c:if test="${loop.index < 6}">
+                <div class="swiper-slide">
+                    <div class="product-card position-relative">
+                        <div class="image-holder">
+                            <img src="${o.image}" alt="product-item" class="img-fluid">
+                        </div>
+                        <div class="cart-concern position-absolute">
+                            <div class="cart-button d-flex">
+                                <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                            <h3 class="card-title text-uppercase">
+                                <a href="#">${o.title}</a>
+                            </h3>
+                            <span class="item-price text-primary">${o.formattedPrice}</span>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+        </c:forEach>
+    </div>
+</div>
+
+      
       <div class="swiper-pagination position-absolute text-center"></div>
     </section>
-    <section id="smart-watches" class="product-store padding-large position-relative">
+    <section id="ipad-products" class="product-store padding-large position-relative">
       <div class="container">
         <div class="row">
           <div class="display-header d-flex justify-content-between pb-3">
-            <h2 class="display-7 text-dark text-uppercase">Smart Watches</h2>
+            <h2 class="display-7 text-dark text-uppercase">Ipad Products</h2>
             <div class="btn-right">
-              <a href="index.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+              <a href="index.jsp" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
             </div>
           </div>
-          <div class="swiper product-watch-swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="product-card position-relative">
-                  <div class="image-holder">
-                    <img src="images/product-item6.jpg" alt="product-item" class="img-fluid">
-                  </div>
-                  <div class="cart-concern position-absolute">
-                    <div class="cart-button d-flex">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                    </div>
-                  </div>
-                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                    <h3 class="card-title text-uppercase">
-                      <a href="#">Pink watch</a>
-                    </h3>
-                    <span class="item-price text-primary">$870</span>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="product-card position-relative">
-                  <div class="image-holder">
-                    <img src="images/product-item7.jpg" alt="product-item" class="img-fluid">
-                  </div>
-                  <div class="cart-concern position-absolute">
-                    <div class="cart-button d-flex">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                    </div>
-                  </div>
-                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                    <h3 class="card-title text-uppercase">
-                      <a href="#">Heavy watch</a>
-                    </h3>
-                    <span class="item-price text-primary">$680</span>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="product-card position-relative">
-                  <div class="image-holder">
-                    <img src="images/product-item8.jpg" alt="product-item" class="img-fluid">
-                  </div>
-                  <div class="cart-concern position-absolute">
-                    <div class="cart-button d-flex">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                    </div>
-                  </div>
-                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                    <h3 class="card-title text-uppercase">
-                      <a href="#">spotted watch</a>
-                    </h3>
-                    <span class="item-price text-primary">$750</span>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="product-card position-relative">
-                  <div class="image-holder">
-                    <img src="images/product-item9.jpg" alt="product-item" class="img-fluid">
-                  </div>
-                  <div class="cart-concern position-absolute">
-                    <div class="cart-button d-flex">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                    </div>
-                  </div>
-                  <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                    <h3 class="card-title text-uppercase">
-                      <a href="#">black watch</a>
-                    </h3>
-                    <span class="item-price text-primary">$650</span>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="product-card position-relative">
-                  <div class="image-holder">
-                    <img src="images/product-item10.jpg" alt="product-item" class="img-fluid">
-                  </div>
-                  <div class="cart-concern position-absolute">
-                    <div class="cart-button d-flex">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                    </div>
-                  </div>
-                  <div class="card-detail d-flex justify-content-between pt-3">
-                    <h3 class="card-title text-uppercase">
-                      <a href="#">black watch</a>
-                    </h3>
-                    <span class="item-price text-primary">$750</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+     	 <div class="swiper product-swiper">
+    <div class="swiper-wrapper">
+        <c:forEach items="${listP}" var="o" varStatus="loop">
+            <c:if test="${loop.index >= 8 && loop.index < 14}">
+                <div class="swiper-slide">
+                    <div class="product-card position-relative">
+                        <div class="image-holder">
+                            <img src="${o.image}" alt="product-item" class="img-fluid">
+                        </div>
+                        <div class="cart-concern position-absolute">
+                            <div class="cart-button d-flex">
+                                <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                            <h3 class="card-title text-uppercase">
+                                <a href="#">${o.title}</a>
+                            </h3>
+                            <span class="item-price text-primary">${o.formattedPrice}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </c:if>
+        </c:forEach>
+    </div>
+</div>
+ </section>
+ 
+ 
+    <section id="macbook-products" class="product-store padding-large position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="display-header d-flex justify-content-between pb-3">
+            <h2 class="display-7 text-dark text-uppercase">Macbook Products</h2>
+            <div class="btn-right">
+              <a href="index.jsp" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+            </div>
+          </div>
+      </div>
+      </div>
+     	 <div class="swiper product-swiper">
+    <div class="swiper-wrapper">
+        <c:forEach items="${listP}" var="o" varStatus="loop">
+            <c:if test="${loop.index >= 14 && loop.index < 24}">
+                <div class="swiper-slide">
+                    <div class="product-card position-relative">
+                        <div class="image-holder">
+                            <img src="${o.image}" alt="product-item" class="img-fluid">
+                        </div>
+                        <div class="cart-concern position-absolute">
+                            <div class="cart-button d-flex">
+                                <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                            <h3 class="card-title text-uppercase">
+                                <a href="#">${o.title}</a>
+                            </h3>
+                            <span class="item-price text-primary">${o.formattedPrice}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </c:if>
+        </c:forEach>
+    </div>
+    </div>
+ <div class="swiper-pagination position-absolute text-center"></div>
+    </section>
+    
+    
+    <section id="aw-products" class="product-store padding-large position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="display-header d-flex justify-content-between pb-3">
+            <h2 class="display-7 text-dark text-uppercase">Watch Products</h2>
+            <div class="btn-right">
+              <a href="index.jsp" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+            </div>
+          </div>
+      </div>
+      
+    <%--  	 <div class="swiper product-swiper">
+    <div class="swiper-wrapper">
+        <c:forEach items="${listP}" var="o" varStatus="loop">
+            <c:if test="${loop.index >= 24 && loop.index < 27}">
+                <div class="swiper-slide">
+                    <div class="product-card position-relative">
+                        <div class="image-holder">
+                            <img src="${o.image}" alt="product-item" class="img-fluid">
+                        </div>
+                        <div class="cart-concern position-absolute">
+                            <div class="cart-button d-flex">
+                                <a href="#" class="btn btn-medium btn-black">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                            <h3 class="card-title text-uppercase">
+                                <a href="#">${o.title}</a>
+                            </h3>
+                            <span class="item-price text-primary">${o.formattedPrice}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </c:if>
+        </c:forEach>
+    </div> --%>
+    </div>
       <div class="swiper-pagination position-absolute text-center"></div>
     </section>
     <section id="yearly-sale" class="bg-light-blue overflow-hidden mt-5 padding-xlarge" style="background-image: url('images/single-image1.png');background-position: right; background-repeat: no-repeat;">
@@ -936,5 +1002,6 @@
     <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    
   </body>
 </html>

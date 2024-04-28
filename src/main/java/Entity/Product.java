@@ -1,5 +1,9 @@
 package Entity;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Product {
 	private int id;
 	private String name;
@@ -61,5 +65,16 @@ public class Product {
 				+ ", description=" + description + "]";
 	}
 	
+	public String getFormattedPrice() {
+        // Tạo một đối tượng NumberFormat cho loại tiền tệ của Việt Nam
+		DecimalFormat format = (DecimalFormat) NumberFormat.getInstance(new Locale("vi", "VN"));
+
+        // Đặt mẫu định dạng không bao gồm ký hiệu tiền tệ
+        format.applyPattern("#,###");
+
+        // Định dạng giá tiền với định dạng không bao gồm ký hiệu tiền tệ
+        return format.format(price);
+    }
+    
 }
 	
