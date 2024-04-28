@@ -563,7 +563,7 @@
                         </div>
                         <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                             <h3 class="card-title text-uppercase">
-                                <a href="#">${o.title}</a>
+                                <a href="detail?pid=${o.id}">${o.title}</a>
                             </h3>
                             <span class="item-price text-primary">${o.formattedPrice}</span>
                         </div>

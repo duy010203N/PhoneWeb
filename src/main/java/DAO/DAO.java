@@ -100,5 +100,28 @@ public class DAO {
 			System.out.println(o);
 		}
 	}
+	public Product getProductByID(String id){
+		String query = "select * from Product where id = ?";
+		try {
+			new DBConnect();
+			conn = DBConnect.getConn();
+			ps = conn.prepareStatement(query);
+			ps.setString(1,id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				return new Product(rs.getInt(1),
+					rs.getString(2),
+					rs.getString(3), 
+					rs.getDouble(4), 
+					rs.getString(5),
+					rs.getString(6));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return null;
+}
+	
 
 }
